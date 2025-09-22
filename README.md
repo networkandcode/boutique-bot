@@ -18,8 +18,8 @@ The Boutique Bot is part of a larger microservices architecture. The bot itself 
 
 The following diagram illustrates the architecture of the system:
 
-```mermaidgraph LR
-    graph LR
+```mermaid
+graph LR
     %% UI
     A[Boutique Bot - Streamlit UI]
 
@@ -84,7 +84,6 @@ The following diagram illustrates the architecture of the system:
 
     H --> KubernetesCluster
     A -.-> W
-
 ```
 
 The main components are:
