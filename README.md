@@ -16,6 +16,83 @@ Boutique Bot is an AI-powered chatbot designed to assist users of the online bou
 
 The Boutique Bot is part of a larger microservices architecture. The bot itself is a Python application that uses a gRPC client to communicate with the various microservices of the boutique. It uses Redis to store chat history.
 
+The following diagram illustrates the architecture of the system:
+
+```mermaid
+graph TD
+    subgraph User Interface
+        A[Boutique Bot - Streamlit UI]
+    end
+
+    subgraph Bot Agents
+        B[Ad Agent]
+        C[Cart Agent]
+        D[Checkout Agent]
+        E[Currency Agent]
+        F[Email Agent]
+        G[Health Check Agent]
+        H[Kubernetes Agent]
+        I[Payment Agent]
+        J[Product Catalog Agent]
+        K[Recommendation Agent]
+        L[Shipping Agent]
+    end
+
+    subgraph Backend Microservices
+        M[Ad Service]
+        N[Cart Service]
+        O[Checkout Service]
+        P[Currency Service]
+        Q[Email Service]
+        R[Health Check Service]
+        S[Payment Service]
+        T[Product Catalog Service]
+        U[Recommendation Service]
+        V[Shipping Service]
+    end
+
+    subgraph Data Store
+        W[Redis - Chat History]
+    end
+
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    A --> H
+    A --> I
+    A --> J
+    A --> K
+    A --> L
+
+    B -- gRPC --> M
+    C -- gRPC --> N
+    D -- gRPC --> O
+    E -- gRPC --> P
+    F -- gRPC --> Q
+    G -- gRPC --> R
+    I -- gRPC --> S
+    J -- gRPC --> T
+    K -- gRPC --> U
+    L -- gRPC --> V
+
+    A -.-> W
+
+    classDef service fill:#f9f,stroke:#333,stroke-width:2px;
+    class M,N,O,P,Q,R,S,T,U,V service;
+
+    classDef agent fill:#ccf,stroke:#333,stroke-width:2px;
+    class B,C,D,E,F,G,H,I,J,K,L agent;
+
+    classDef ui fill:#cfc,stroke:#333,stroke-width:2px;
+    class A ui;
+
+    classDef data fill:#fca,stroke:#333,stroke-width:2px;
+    class W data;
+```
+
 The main components are:
 - **Streamlit UI:** The user interface for the chatbot.
 - **Boutique Bot Application:** The core Python application that handles chat logic and agent orchestration.
