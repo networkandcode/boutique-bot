@@ -1,0 +1,22 @@
+[project]
+name = "botique-bot"
+version = "0.1.0"
+description = "AI assistant for the online boutique microservices demo app"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=1.38.0",
+    "grpcio>=1.75.0",
+    "grpcio-health-checking>=1.75.0",
+    "mcp-agent>=0.1.25",
+    "plotly>=6.3.0",
+    "redis>=6.4.0",
+    "streamlit>=1.49.1",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.9.0",
+    "grpcio-tools>=1.75.0",
+    "ruff>=0.13.1",
+]

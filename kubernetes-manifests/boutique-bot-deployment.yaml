@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boutique-bot
+  labels:
+    app: boutique-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boutique-bot
+  template:
+    metadata:
+      labels:
+        app: boutique-bot
+    spec:
+      serviceAccountName: boutique-bot
+      containers:
+      - name: boutique-bot
+        image: networkandcode/boutique-bot
+        ports:
+        - containerPort: 8501
+        envFrom:
+        - configMapRef:
+            name: boutique-bot-env
+        volumeMounts:
+        - name: mcp-agent-config
+          mountPath: "/app/mcp_agent.config.yaml"
+          subPath: "mcp_agent.config.yaml"
+        - name: mcp-agent-secrets
+          mountPath: "/app/mcp_agent.secrets.yaml"
+          subPath: "mcp_agent.secrets.yaml"
+      volumes:
+      - name: mcp-agent-config
+        configMap:
+          name: mcp-agent-config
+      - name: mcp-agent-secrets
+        secret:
+          secretName: mcp-agent-secrets

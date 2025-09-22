@@ -1,0 +1,14 @@
+google:
+  default_model: gemini-2.5-flash
+mcp:
+  servers:
+    kubernetes:
+      args:
+      - "-y"
+      - "kubernetes-mcp-server@latest"
+      command: "npx"
+    playwright:
+      args:
+      - "@playwright/mcp@latest"
+      command: "npx"
+      

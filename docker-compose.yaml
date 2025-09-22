@@ -1,0 +1,17 @@
+services:
+  redis-chat-history:
+    image: redis:latest
+    container_name: redis-chat-history
+    ports:
+      - "6379:6379"
+  boutique-bot:
+    image: networkandcode/boutique-bot
+    # build: .
+    container_name: boutique-bot
+    env_file: .env.docker
+    ports:
+      - "8001:8501"
+    volumes:
+      - ./mcp_agent.config.yaml:/app/mcp_agent.config.yaml
+    depends_on:
+      - redis-chat-history

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-chat-history
+  labels:
+    app: redis-chat-history
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-chat-history
+  template:
+    metadata:
+      labels:
+        app: redis-chat-history
+    spec:
+      containers:
+      - name: redis-chat-history
+        image: redis:latest
+        ports:
+        - containerPort: 6379
