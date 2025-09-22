@@ -18,13 +18,13 @@ The Boutique Bot is part of a larger microservices architecture. The bot itself 
 
 The following diagram illustrates the architecture of the system:
 
-```mermaid
-graph TD
-    subgraph User Interface
-        A[Boutique Bot - Streamlit UI]
-    end
+```mermaidgraph LR
+    graph LR
+    %% UI
+    A[Boutique Bot - Streamlit UI]
 
-    subgraph Bot Agents
+    %% Agents
+    subgraph Agents
         B[Ad Agent]
         C[Cart Agent]
         D[Checkout Agent]
@@ -36,9 +36,11 @@ graph TD
         J[Product Catalog Agent]
         K[Recommendation Agent]
         L[Shipping Agent]
+        X[Browser Agent]
     end
 
-    subgraph Backend Microservices
+    %% Services
+    subgraph Services
         M[Ad Service]
         N[Cart Service]
         O[Checkout Service]
@@ -51,10 +53,10 @@ graph TD
         V[Shipping Service]
     end
 
-    subgraph Data Store
-        W[Redis - Chat History]
-    end
+    %% Data
+    W[Redis - Chat History]
 
+    %% Connections
     A --> B
     A --> C
     A --> D
@@ -66,31 +68,23 @@ graph TD
     A --> J
     A --> K
     A --> L
+    A --> X
 
-    B -- gRPC --> M
-    C -- gRPC --> N
-    D -- gRPC --> O
-    E -- gRPC --> P
-    F -- gRPC --> Q
-    G -- gRPC --> R
-    I -- gRPC --> S
-    J -- gRPC --> T
-    K -- gRPC --> U
-    L -- gRPC --> V
+    B --> M
+    C --> N
+    D --> O
+    E --> P
+    F --> Q
+    G --> R
+    I --> S
+    J --> T
+    K --> U
+    L --> V
+    X --> Web
 
+    H --> KubernetesCluster
     A -.-> W
 
-    classDef service fill:#f9f,stroke:#333,stroke-width:2px;
-    class M,N,O,P,Q,R,S,T,U,V service;
-
-    classDef agent fill:#ccf,stroke:#333,stroke-width:2px;
-    class B,C,D,E,F,G,H,I,J,K,L agent;
-
-    classDef ui fill:#cfc,stroke:#333,stroke-width:2px;
-    class A ui;
-
-    classDef data fill:#fca,stroke:#333,stroke-width:2px;
-    class W data;
 ```
 
 The main components are:
